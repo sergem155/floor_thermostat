@@ -1,0 +1,15 @@
+{
+  "name": "thermostat",
+  "description": "Floor thermostat UI using Raspberry PI for NuHeat floors",
+  "version": "0.0.0",
+  "homepage": "https://github.com/sergem155/thermostat",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular": "1.6.x",
+    "angular-resource": "1.6.x",
+    "angular-route": "1.6.x",
+    "bootstrap": "4.0.x",
+    "angular-circular-timepicker": "*"
+  }
+}

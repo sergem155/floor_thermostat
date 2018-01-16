@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="thermostatApp">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Bathroom Floor Thermostat</title>
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://use.fontawesome.com/6acf84ac6a.js"></script>
+  </head>
+  <body style="margin: 0; padding: 0; border: none; overflow: hidden;">
+
+	<div ng-view></div>
+
+    <script src="js/bootstrap.min.js"></script>
+
+    <script src="js/angular.js"></script>
+    <script src="js/angular-route.js"></script>
+    <script src="js/angular-resource.js"></script>
+    <script src="app.module.js"></script>
+    <script src="app.config.js"></script>
+    <script src="weather-forecast/weather-forecast.module.js"></script>
+    <script src="weather-forecast/weather-forecast.component.js"></script>
+    <script src="weather-current/weather-current.module.js"></script>
+    <script src="weather-current/weather-current.component.js"></script>
+    <script src="thermostat-status/thermostat-status.module.js"></script>
+    <script src="thermostat-status/thermostat-status.component.js"></script>
+    <script src="core/core.module.js"></script>
+    <script src="core/thermostat.service.js"></script>
+    <script src="schedule-list/schedule-list.module.js"></script>
+    <script src="schedule-list/schedule-list.component.js"></script>
+  </body>
+</html>

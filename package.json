@@ -1,0 +1,16 @@
+{
+  "name": "thermostat",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Floor thermostat UI using Raspberry PI for NuHeat floors",
+  "repository": "https://github.com/sergem155/thermostat",
+  "license": "MIT",
+  "devDependencies": {
+    "bower": "^1.7.7"
+  },
+  "scripts": {
+    "postinstall": "bower install",
+    "update-deps": "npm update",
+    "postupdate-deps": "bower update"
+  }
+}

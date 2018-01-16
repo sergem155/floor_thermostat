@@ -1,0 +1,31 @@
+<div class="row bg-primary text-white" style="padding-top:10px;">
+	<div class="col-5" ng-if="$ctrl.thermostat.set_temp > 41">
+		<h1><span class="fa fa-thermometer-4"></span> {{$ctrl.thermostat.temp}}F &raquo; {{$ctrl.thermostat.set_temp}}F <span class="fa fa-bolt" ng-if="$ctrl.thermostat.relay=='on'"></span></h1>
+	</div>
+	<div class="col-2" ng-if="$ctrl.thermostat.set_temp > 41">
+		<button type="button" class="btn btn-light" style="margin-top:5px;" ng-click="turn_off();">
+			<span class="fa fa-snowflake-o"></span> Turn off
+		</button>
+	</div>
+	<div class="col-3" ng-if="$ctrl.thermostat.set_temp < 42">
+		<h1><span class="fa fa-thermometer-4"></span> {{$ctrl.thermostat.temp}}F <span class="fa fa-snowflake-o"></span></h1>
+	</div>
+	<div class="col-4" ng-if="$ctrl.thermostat.set_temp < 42">
+		<button type="button" class="btn btn-light" style="margin-top:5px;" ng-click="turn_on();">
+			<span class="fa fa-thermometer-full"></span> Turn on
+		</button>
+	</div>
+	<div class="col-2 text-right">
+   		<h1 ng-controller='TimeCtrl'>{{ clock | date:'HH:mm'}}</h1>
+	</div>
+	<div class="col-3 text-right">
+		<button type="button" class="btn btn-light" style="margin-top:5px; margin-right:10px;" onclick="window.location.reload()">
+			<span class="fa fa-refresh"></span>
+		</button>
+		<button type="button" class="btn btn-light" style="margin-top:5px;" onclick="location.href='#!/schedule-list'">
+			<span class="fa fa-gear"></span>
+		</button>
+	</div>
+
+</div>
+
