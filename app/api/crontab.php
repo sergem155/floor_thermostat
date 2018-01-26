@@ -1,11 +1,12 @@
 <?php
-#$output = shell_exec('crontab -l');
-#file_put_contents('/tmp/crontab.txt', $output.'* * * * * NEW_CRON'.PHP_EOL);
-#echo exec('crontab /tmp/crontab.txt');
-#echo exec('crontab -r');
-
-
-
+function read_file($fname, $default){
+	$x = $default;
+	if($myfile = fopen($fname, "r")){
+		$x = fread($myfile,10000);
+		fclose($myfile);
+	}
+	return trim($x);
+}
 
 function write_file($fname, $x){
 	$myfile = fopen($fname, "w") or die("Unable to open file!");
@@ -14,8 +15,14 @@ function write_file($fname, $x){
 }
 
 if ($_SERVER['REQUEST_METHOD']=='GET'){
+	$item = FALSE;
+	if(isset($_REQUEST['item']) && !empty($_REQUEST['item']) && $_REQUEST['item']!='list'){
+		$item = $_REQUEST['item'];
+	}
 	$schedules = array();
-	exec('crontab -l',$output);
+	#exec('crontab -l',$output);
+	$output=read_file("/tmp/crontab-init.txt",'');
+	$output=explode("\n", $output);
 	foreach($output as $line){
 		$line=trim($line);
 		if(!strpos($line,'#')){
@@ -75,12 +82,30 @@ if ($_SERVER['REQUEST_METHOD']=='GET'){
 		}
 	}
 	header('Content-Type: application/json');
-	echo json_encode($paired_schedules);
+	if($item){
+		$schedule_item = array();
+		foreach($paired_schedules as $struct) {
+			if ($item == $struct['key']) {
+				$schedule_item = $struct;
+				break;
+			}
+		}
+		echo json_encode($schedule_item);
+	}else{
+		echo json_encode($paired_schedules);
+	}
 }else{
 	//$data = json_decode(file_get_contents('php://input'), true);
 	//if( $data['set_temp'] > 40 && $data['set_temp'] < 90){
 	//	write_file("/tmp/set-temp.txt",$data['set_temp']);
 	//}
+	#$output = shell_exec('crontab -l');
+	#file_put_contents('/tmp/crontab.txt', $output.'* * * * * NEW_CRON'.PHP_EOL);
+	#echo exec('crontab /tmp/crontab.txt');
+	#echo exec('crontab -r');
+
+
+
 }
 
 ?>

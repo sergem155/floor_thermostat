@@ -1,8 +1,8 @@
 // Define the app module
 angular.module('thermostatApp', [
   // ...which depends on the module:
-  'weatherForecast','weatherCurrent','thermostatStatus','core','scheduleList','ngRoute'
-]).controller('TimeCtrl', function($scope, $interval) { // clock controller
+  'weatherForecast','weatherCurrent','thermostatStatus','core','scheduleList','scheduleDetail','timeInput','ngRoute'
+]).controller('TimeCtrl', function($scope, $interval) { // simple clock controller
 	var tick = function() {
 		$scope.clock = Date.now();
 	}

@@ -6,6 +6,7 @@
   position: absolute;
   top: 30%;
   transform-origin: 50% 100%;
+  -webkit-transform-origin: 50% 100%;
   width: 3%;
 }
 
@@ -16,55 +17,60 @@
   position: absolute;
   top: 12%;
   transform-origin: 50% 100%;
+  -webkit-transform-origin: 50% 100%;
   width: 1%;
 }
 
 .selected-arm {
-  background: #000;
+  background: #333;
 }
 
 .digit-label {
 	position: absolute;
 	margin: -7% 0 0 -7%;
-	width: 14%;height:14%;
+	width: 14%;
+	height:14%;
 	border-radius:50%;
 	text-align:center;
 	cursor:pointer;
 	padding:2%;
-	font-size:22px;
+	font-size:18px;
 }
 
 .hour-label {
 	background-color: white; 
-	border: 1px dotted blue;
+	border: 2px dotted #007bff;
 	color: black; 
 }
 .minute-label {}
 .selected {
-	background-color: blue; 
+	background-color: #007bff; 
 	color:white; 
 }
 
 
 </style>
-{{$ctrl.label}}
-	<div style="width: 400px; height: 400px; border: 1px dotted blue;position:relative;">
-		<div class="minute-arm" ng-class="{'selected-arm':minute==$ctrl.minute}" 
-		style=" transform: rotate({{(minute)*6}}deg);" 
-		ng-repeat="minute in [0,5,10,15,20,25,30,35,40,45,50,55]"></div>
+	<div style="xfloat:left;">
+		<div class="text-center">
+			<h2>{{$ctrl.hour}}:{{("00"+$ctrl.minute).slice(-2)}} am</h2>
+		</div>
+		<div style="width: 300px; height: 300px;position:relative;">
+			<div class="minute-arm" ng-class="{'selected-arm':minute==$ctrl.minute}" 
+			style=" transform: rotate({{(minute)*6}}deg);-webkit-transform: rotate({{(minute)*6}}deg); " 
+			ng-repeat="minute in [0,5,10,15,20,25,30,35,40,45,50,55]"></div>
 
-		<div class="minute-label digit-label" ng-class="{'selected':minute==$ctrl.minute}" ng-click="setMinute(time)" 
-		style=" left:{{50+Math.cos((45+minute)/30*Math.PI)*42}}%;top:{{50+Math.sin((45+minute)/30*Math.PI)*42}}%;"
-		ng-repeat="minute in [0,5,10,15,20,25,30,35,40,45,50,55]">{{minute}}</div>
+			<div class="minute-label digit-label" ng-class="{'selected':minute==$ctrl.minute}" ng-click="setMinute(minute)" 
+			style=" left:{{50+Math.cos((45+minute)/30*Math.PI)*42}}%;top:{{50+Math.sin((45+minute)/30*Math.PI)*42}}%;"
+			ng-repeat="minute in [0,5,10,15,20,25,30,35,40,45,50,55]">{{minute}}</div>
 
-		<div class="hour-label digit-label" ng-class="{'selected':hour==$ctrl.hour}" ng-click="setHour(time)" 
-		style="left:{{50+Math.cos((9+hour)/6*Math.PI)*28}}%;top:{{50+Math.sin((9+hour)/6*Math.PI)*28}}%;"
-		ng-repeat="hour in [1,2,3,4,5,6,7,8,9,10,11,12]">{{hour}}</div>
+			<div class="hour-label digit-label" ng-class="{'selected':hour==$ctrl.hour}" ng-click="setHour(hour)" 
+			style="left:{{50+Math.cos((9+hour)/6*Math.PI)*28}}%;top:{{50+Math.sin((9+hour)/6*Math.PI)*28}}%;"
+			ng-repeat="hour in [1,2,3,4,5,6,7,8,9,10,11,12]">{{hour}}</div>
 
-		<div class="hour-arm" ng-class="{'selected-arm':hour==$ctrl.hour}" 
-		style=" transform: rotate({{hour*30}}deg);" 
-		ng-repeat="hour in [1,2,3,4,5,6,7,8,9,10,11,12]"></div>
+			<div class="hour-arm" ng-class="{'selected-arm':hour==$ctrl.hour}" 
+			style=" transform: rotate({{hour*30}}deg);-webkit-transform: rotate({{hour*30}}deg);" 
+			ng-repeat="hour in [1,2,3,4,5,6,7,8,9,10,11,12]"></div>
 
-		<div style="position:absolute; left:50%; top:50%; margin:-2% 0 0 -2%; width:4%; height:4%;border-radius:50%;background-color:black;"></div>
-  	</div>
-
+			<div style="position:absolute; left:50%; top:50%; margin:-2% 0 0 -2%; width:4%; height:4%;border-radius:50%;background-color:#333;"></div>
+	  	</div>
+	</div>

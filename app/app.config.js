@@ -15,6 +15,9 @@ angular.
         when('/schedule-list', {
           template: '<schedule-list></schedule-list>'
         }).
+        when('/schedule-detail/:scheduleId', {
+          template: '<schedule-detail></schedule-detail>'
+        }).
         otherwise('/thermostat');
     }
   ]);

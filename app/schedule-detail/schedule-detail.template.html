@@ -1,3 +1,44 @@
+<style>
+.hour-arm {
+  background: #000;
+  height: 20%;
+  left: 48.5%;
+  position: absolute;
+  top: 30%;
+  transform-origin: 50% 100%;
+  width: 3%;
+}
+
+.minute-arm {
+  background: #000;
+  height: 38%;
+  left: 49.5%;
+  position: absolute;
+  top: 12%;
+  transform-origin: 50% 100%;
+  width: 1%;
+}
+
+.digit-label {
+	position: absolute;
+	margin: -7% 0 0 -7%;
+	width: 14%;height:14%;
+	border-radius:50%;
+	text-align:center;
+	cursor:pointer;
+	padding:2%;
+	font-size:22px;
+}
+
+.hour-label {
+	background-color: blue; 
+	color:white; 
+}
+.minute-label {}
+
+
+</style>
+
 <div class="container-fluid">
 
 	<div class="row bg-primary text-white" style="padding-top:10px;">
@@ -16,9 +57,7 @@
 		</div>	
 	</div>
 
-	<div class="row">
-		{{$ctrl.scheduleItem.key}}
-	</div>
-
+	<time-input style="float:left;" hour="{{hour2412($ctrl.scheduleItem.hour1)}}" minute="{{$ctrl.scheduleItem.minute1}}" meridiem="{{$ctrl.scheduleItem.hour1<11?'am':'pm'}}" label="from"></time-input>
+	<time-input style="float:right;" hour="{{hour2412($ctrl.scheduleItem.hour2)}}" minute="{{$ctrl.scheduleItem.minute2}}" meridiem="{{$ctrl.scheduleItem.hour2<11?'am':'pm'}}" label="until"></time-input>
 </div>
 
