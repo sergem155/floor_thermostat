@@ -45,25 +45,27 @@
 .minute-label {}
 .selected {
 	background-color: #007bff; 
-	color:white; 
+	color:white!important; 
 }
 
 
 </style>
-	<div style="xfloat:left;">
+	<div style="xfloat:left;margin-top:10px;">
 		<div class="text-center">
-			<h2>{{$ctrl.hour}}:{{("00"+$ctrl.minute).slice(-2)}} am</h2>
+			<h2>{{$ctrl.hour}}:{{("00"+$ctrl.minute).slice(-2)}} 
+				<span class="text-primary" style="cursor:pointer;" ng-click="setMeridiem($ctrl.meridiem=='am'?'pm':'am')")">{{$ctrl.meridiem}}</span>
+			</h2>
 		</div>
 		<div style="width: 300px; height: 300px;position:relative;">
 			<div class="minute-arm" ng-class="{'selected-arm':minute==$ctrl.minute}" 
 			style=" transform: rotate({{(minute)*6}}deg);-webkit-transform: rotate({{(minute)*6}}deg); " 
 			ng-repeat="minute in [0,5,10,15,20,25,30,35,40,45,50,55]"></div>
 
-			<div class="minute-label digit-label" ng-class="{'selected':minute==$ctrl.minute}" ng-click="setMinute(minute)" 
+			<div class="minute-label digit-label text-primary" ng-class="{'selected':minute==$ctrl.minute}" ng-click="setMinute(minute)" 
 			style=" left:{{50+Math.cos((45+minute)/30*Math.PI)*42}}%;top:{{50+Math.sin((45+minute)/30*Math.PI)*42}}%;"
 			ng-repeat="minute in [0,5,10,15,20,25,30,35,40,45,50,55]">{{minute}}</div>
 
-			<div class="hour-label digit-label" ng-class="{'selected':hour==$ctrl.hour}" ng-click="setHour(hour)" 
+			<div class="hour-label digit-label text-primary" ng-class="{'selected':hour==$ctrl.hour}" ng-click="setHour(hour)" 
 			style="left:{{50+Math.cos((9+hour)/6*Math.PI)*28}}%;top:{{50+Math.sin((9+hour)/6*Math.PI)*28}}%;"
 			ng-repeat="hour in [1,2,3,4,5,6,7,8,9,10,11,12]">{{hour}}</div>
 

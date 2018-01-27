@@ -66,12 +66,12 @@ if ($_SERVER['REQUEST_METHOD']=='GET'){
 			}else{
 				if($last['time']<$days[$time]['time'] && $last['temp']>$days[$time]['temp']){
 					array_push($paired_schedules,
-						array('minute1'=>$last['minute'],
-						'hour1'=>$last['hour'],
-						'temp1'=>$last['temp'],
-						'minute2'=>$days[$time]['minute'],
-						'hour2'=>$days[$time]['hour'],
-						'temp2'=>$days[$time]['temp'],
+						array('minute1'=>intval($last['minute']),
+						'hour1'=>intval($last['hour']),
+						'temp1'=>intval($last['temp']),
+						'minute2'=>intval($days[$time]['minute']),
+						'hour2'=>intval($days[$time]['hour']),
+						'temp2'=>intval($days[$time]['temp']),
 						'days'=>array_values($last['days_of_week']),
 						'key'=>$days[$time]['days_key'].'-'.$last['time'].'-'.$days[$time]['time']
 						));
