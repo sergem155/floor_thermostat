@@ -56,8 +56,15 @@
 			</button>
 		</div>	
 	</div>
-
-	<time-input style="float:left;" hour="{{hour2412($ctrl.scheduleItem.hour1)}}" minute="{{$ctrl.scheduleItem.minute1}}" meridiem="{{$ctrl.scheduleItem.hour1<11?'am':'pm'}}" label="from"></time-input>
-	<time-input style="float:right;" hour="{{hour2412($ctrl.scheduleItem.hour2)}}" minute="{{$ctrl.scheduleItem.minute2}}" meridiem="{{$ctrl.scheduleItem.hour2<11?'am':'pm'}}" label="until"></time-input>
+<style>
+.days {width: 96%; margin:4px;display:block;font-size:19px;}
+</style>
+	<time-input style="float:left;margin:10px;" hour="{{hour2412($ctrl.scheduleItem.hour1)}}" minute="{{$ctrl.scheduleItem.minute1}}" meridiem="{{$ctrl.scheduleItem.hour1<11?'am':'pm'}}" label="from"></time-input>
+	<time-input style="float:left;margin:10px;" hour="{{hour2412($ctrl.scheduleItem.hour2)}}" minute="{{$ctrl.scheduleItem.minute2}}" meridiem="{{$ctrl.scheduleItem.hour2<11?'am':'pm'}}" label="until"></time-input>
+	<div style="width:auto;margin:10px;overflow:hidden;">
+		<button ng-repeat="day in [0,1,2,3,4,5,6]" class="btn days" 
+		ng-class="$ctrl.scheduleItem.days.indexOf(''+day)==-1?'btn-outline-primary':'btn-primary'"
+		ng-click="toggle(day)">{{$ctrl.day_names[day]}}</div>
+	</div>
 </div>
 

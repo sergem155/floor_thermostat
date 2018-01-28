@@ -5,6 +5,7 @@ angular.
 		templateUrl: 'schedule-detail/schedule-detail.template.html',
 		controller: ['$http','$scope','Schedule','$routeParams',function ScheduleDetailController($http,$scope,Schedule,$routeParams) {
 			var self=this;
+			self.day_names=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 			self.scheduleItem = Schedule.get({scheduleId: $routeParams.scheduleId});
 			//$scope.Math = window.Math;
 			$scope.update = function(item,label,timeunit,meridiem){	
@@ -49,6 +50,13 @@ angular.
 						return hour;
 				else
 					return (hour+12) % 24;
+			}
+			$scope.toggle = function(day){
+				console.log(day);
+				if(self.scheduleItem.days.indexOf(''+day)==-1)
+					self.scheduleItem.days.push(''+day);
+				else
+					self.scheduleItem.days.splice(self.scheduleItem.days.indexOf(''+day),1);
 			}
     	}]
 	});
