@@ -36,6 +36,20 @@
 }
 .minute-label {}
 
+.btnx {
+	display: inline-block;
+	font-weight: 400;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	border: 1px solid transparent;
+	padding: .375rem .75rem;
+	font-size: 1rem;
+	line-height: 1.5;
+	border-radius: .25rem;
+}
+
+.days {width: 9%; margin:1.5% 2.5%;display:inline-block;font-size:19px;}
 
 </style>
 
@@ -56,15 +70,20 @@
 			</button>
 		</div>	
 	</div>
-<style>
-.days {width: 96%; margin:4px;display:block;font-size:19px;}
-</style>
-	<time-input style="float:left;margin:10px;" hour="{{hour2412($ctrl.scheduleItem.hour1)}}" minute="{{$ctrl.scheduleItem.minute1}}" meridiem="{{$ctrl.scheduleItem.hour1<11?'am':'pm'}}" label="from"></time-input>
-	<time-input style="float:left;margin:10px;" hour="{{hour2412($ctrl.scheduleItem.hour2)}}" minute="{{$ctrl.scheduleItem.minute2}}" meridiem="{{$ctrl.scheduleItem.hour2<11?'am':'pm'}}" label="until"></time-input>
-	<div style="width:auto;margin:10px;overflow:hidden;">
+
+	<div class="row"><div class="col-12">
 		<button ng-repeat="day in [0,1,2,3,4,5,6]" class="btn days" 
 		ng-class="$ctrl.scheduleItem.days.indexOf(''+day)==-1?'btn-outline-primary':'btn-primary'"
 		ng-click="toggle(day)">{{$ctrl.day_names[day]}}</div>
+	</div></div>
+	<div class="row" style="margin-top:5px;">
+		<time-input class="col-5" hour="{{hour2412($ctrl.scheduleItem.hour1)}}" minute="{{$ctrl.scheduleItem.minute1}}" meridiem="{{$ctrl.scheduleItem.hour1<11?'am':'pm'}}" label="from"></time-input>
+		<time-input class="col-5" hour="{{hour2412($ctrl.scheduleItem.hour2)}}" minute="{{$ctrl.scheduleItem.minute2}}" meridiem="{{$ctrl.scheduleItem.hour2<11?'am':'pm'}}" label="until"></time-input>
+		<div style="float:left;font-size:50px;margin-top:7%;" class="col-2 text-center">
+			<div ng-click="($ctrl.scheduleItem.temp1<90)&&($ctrl.scheduleItem.temp1=$ctrl.scheduleItem.temp1+1)"><span class="fa fa-chevron-circle-up text-primary"></span></div>
+			<div>{{$ctrl.scheduleItem.temp1}}F</div>
+			<div ng-click="($ctrl.scheduleItem.temp1>43) && ($ctrl.scheduleItem.temp1=$ctrl.scheduleItem.temp1-1)"><span class="fa fa-chevron-circle-down text-primary"></span></div>
+		</div>
 	</div>
 </div>
 
