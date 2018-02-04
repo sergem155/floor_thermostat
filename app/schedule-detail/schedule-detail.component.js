@@ -6,7 +6,10 @@ angular.
 		controller: ['$http','$scope','Schedule','$routeParams',function ScheduleDetailController($http,$scope,Schedule,$routeParams) {
 			var self=this;
 			self.day_names=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-			self.scheduleItem = Schedule.get({scheduleId: $routeParams.scheduleId});
+			if($routeParams.scheduleId=='new')
+				self.scheduleItem = {"minute1":0,"hour1":19,"temp1":82,"minute2":45,"hour2":23,"temp2":41,"days":["0","1","2","3","4","5","6"],"scheduleId":"new"};
+			else
+				self.scheduleItem = Schedule.get({scheduleId: $routeParams.scheduleId});
 			//$scope.Math = window.Math;
 			$scope.update = function(item,label,timeunit,meridiem){	
 				if(label=='from'){
@@ -27,6 +30,7 @@ angular.
 					}else if (timeunit=='hour'){
 						self.scheduleItem.hour2=$scope.hour1224(item,meridiem);
 					}else{ // meridiem
+						console.log(self.scheduleItem.hour2);
 						if(self.scheduleItem.hour2>11){ // to am
 							self.scheduleItem.hour2-=12;
 						}else{ // to pm
@@ -52,11 +56,15 @@ angular.
 					return (hour+12) % 24;
 			}
 			$scope.toggle = function(day){
-				console.log(day);
 				if(self.scheduleItem.days.indexOf(''+day)==-1)
 					self.scheduleItem.days.push(''+day);
 				else
 					self.scheduleItem.days.splice(self.scheduleItem.days.indexOf(''+day),1);
+			}
+			$scope.save = function(){
+				Schedule.save(self.scheduleItem,function(response){
+						window.location='#!/schedule-list';
+				});
 			}
     	}]
 	});

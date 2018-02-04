@@ -12,5 +12,8 @@
     "postinstall": "bower install",
     "update-deps": "npm update",
     "postupdate-deps": "bower update"
+  },
+  "dependencies": {
+    "roboto-fontface": "^0.8.0"
   }
 }

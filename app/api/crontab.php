@@ -14,11 +14,8 @@ function write_file($fname, $x){
 	fclose($myfile);
 }
 
-if ($_SERVER['REQUEST_METHOD']=='GET'){
-	$item = FALSE;
-	if(isset($_REQUEST['item']) && !empty($_REQUEST['item']) && $_REQUEST['item']!='list'){
-		$item = $_REQUEST['item'];
-	}
+// loads crontab, tries to match on/off lines, throws away the rest
+function load_schedules(){
 	$schedules = array();
 	#exec('crontab -l',$output);
 	$output=read_file("/tmp/crontab-init.txt",'');
@@ -73,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD']=='GET'){
 						'hour2'=>intval($days[$time]['hour']),
 						'temp2'=>intval($days[$time]['temp']),
 						'days'=>array_values($last['days_of_week']),
-						'key'=>$days[$time]['days_key'].'-'.$last['time'].'-'.$days[$time]['time']
+						'scheduleId'=>$days[$time]['days_key'].'-'.$last['time'].'-'.$days[$time]['time']
 						));
 				}else{
 					$last=$days[$time];
@@ -81,19 +78,49 @@ if ($_SERVER['REQUEST_METHOD']=='GET'){
 			}
 		}
 	}
+	return $paired_schedules;
+}
+
+if ($_SERVER['REQUEST_METHOD']=='GET'){
+	$item = FALSE;
+	if(isset($_REQUEST['item']) && !empty($_REQUEST['item']) && $_REQUEST['item']!='list'){
+		$item = $_REQUEST['item'];
+	}
+	$paired_schedules=load_schedules();
 	header('Content-Type: application/json');
-	if($item){
+	if($item){ // getting specific item
 		$schedule_item = array();
 		foreach($paired_schedules as $struct) {
-			if ($item == $struct['key']) {
+			if ($item == $struct['scheduleId']) {
 				$schedule_item = $struct;
 				break;
 			}
 		}
 		echo json_encode($schedule_item);
-	}else{
+	}else{ // getting list of things
 		echo json_encode($paired_schedules);
 	}
+}elseif($_SERVER['REQUEST_METHOD']=='POST'){
+	$paired_schedules=load_schedules();
+	$data = json_decode(file_get_contents('php://input'), true);
+	if (($key = array_search($del_val, $messages)) !== false) {
+		unset($messages[$key]);
+	}
+	// delete if replacing
+	foreach($paired_schedules as $key => $struct) {
+		if ($data['scheduleId'] == $struct['scheduleId']) {
+			unset($paired_schedules[$key]);
+		}
+	}
+	// insert
+	array_push($paired_schedules,$data);
+	// render
+	foreach($paired_schedules as $struct) {
+		extract($struct);
+		echo "$minute1 $hour1 * * ".implode(',',$days)." /home/pi/settemp.sh $temp1\n"
+			."$minute2 $hour2 * * ".implode(',',$days)." /home/pi/settemp.sh $temp2\n";
+	}
+	
 }else{
 	//$data = json_decode(file_get_contents('php://input'), true);
 	//if( $data['set_temp'] > 40 && $data['set_temp'] < 90){

@@ -7,7 +7,11 @@ angular.
 			var self=this;
 			self.schedule = Schedule.query();
 			$scope.navigate = function(period){
-				window.location='#!/schedule-detail/'+window.encodeURIComponent(period.key);
+				if(period=='new') 
+					scheduleId = 'new';
+				else
+					scheduleId = period.scheduleId
+				window.location='#!/schedule-detail/'+window.encodeURIComponent(scheduleId);
 			}
     	}]
 	});

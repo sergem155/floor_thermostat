@@ -86,7 +86,7 @@
 			<h1>Schedule Item</h1>
 		</div>
 		<div class="col-2 text-right">
-			<div class="graybutton" style="margin-top:5px;" onclick="location.href='#!/thermostat'">
+			<div class="graybutton" style="margin-top:5px;" ng-click="save()">
 				Save
 			</div>
 		</div>	
@@ -98,8 +98,8 @@
 		ng-click="toggle(day)">{{$ctrl.day_names[day]}}</div>
 	</div></div>
 	<div class="row" style="margin-top:5px;">
-		<time-input style="width:40%" hour="{{hour2412($ctrl.scheduleItem.hour1)}}" minute="{{$ctrl.scheduleItem.minute1}}" meridiem="{{$ctrl.scheduleItem.hour1<11?'am':'pm'}}" label="from"></time-input>
-		<time-input style="width:40%" hour="{{hour2412($ctrl.scheduleItem.hour2)}}" minute="{{$ctrl.scheduleItem.minute2}}" meridiem="{{$ctrl.scheduleItem.hour2<11?'am':'pm'}}" label="until"></time-input>
+		<time-input style="width:40%" hour="{{hour2412($ctrl.scheduleItem.hour1)}}" minute="{{$ctrl.scheduleItem.minute1}}" meridiem="{{$ctrl.scheduleItem.hour1<12?'am':'pm'}}" label="from"></time-input>
+		<time-input style="width:40%" hour="{{hour2412($ctrl.scheduleItem.hour2)}}" minute="{{$ctrl.scheduleItem.minute2}}" meridiem="{{$ctrl.scheduleItem.hour2<12?'am':'pm'}}" label="until"></time-input>
 		<div style="float:left;font-size:50px;padding-top:7%;padding-left:1%;width:15%" class="text-center">
 			<div ng-click="($ctrl.scheduleItem.temp1<90)&&($ctrl.scheduleItem.temp1=$ctrl.scheduleItem.temp1+1)"><span class="fa fa-chevron-circle-up text-primary"></span></div>
 			<div>{{$ctrl.scheduleItem.temp1}}F</div>
