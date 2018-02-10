@@ -14,6 +14,7 @@
     "postupdate-deps": "bower update"
   },
   "dependencies": {
+    "font-awesome": "^4.7.0",
     "roboto-fontface": "^0.8.0"
   }
 }

@@ -10,6 +10,12 @@
 			<h1>Schedules</h1>
 		</div>
 		<div class="col-2 text-right">
+			<div ng-if="$ctrl.schedule_status.schedule_status == 0" class="graybutton" style="margin-top:5px;margin-right:10px" ng-click="set_schedule(1)">
+				<span class="fa fa-calendar"></span> Enable
+			</div>
+			<div ng-if="$ctrl.schedule_status.schedule_status == 1" class="graybutton" style="margin-top:5px;margin-right:10px" ng-click="set_schedule(0)">
+				<span class="fa fa-calendar"></span> Disable
+			</div>
 			<div class="graybutton" style="margin-top:5px;" ng-click="navigate('new')">
 				Add
 			</div>

@@ -8,11 +8,11 @@
 		</div>
 	</div>
 	<div class="col-3" ng-if="$ctrl.thermostat.set_temp < 42">
-		<h1><span class="fa fa-thermometer-4"></span> {{$ctrl.thermostat.temp}}F <span class="fa fa-snowflake-o"></span></h1>
+		<h1><span class="fa fa-thermometer-4"></span> {{$ctrl.thermostat.temp}}F</span></h1>
 	</div>
 	<div class="col-4" ng-if="$ctrl.thermostat.set_temp < 42">
 		<div class="graybutton" style="margin-top:5px;" ng-click="turn_on();">
-			<span class="fa fa-thermometer-full"></span> Turn on
+			<span class="fa fa-bolt"></span> Turn on
 		</div>
 	</div>
 	<div class="col-2 text-right">
