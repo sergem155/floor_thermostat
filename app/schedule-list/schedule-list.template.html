@@ -3,7 +3,7 @@
 	<div class="row bg-primary text-white" style="padding-top:10px;">
 		<div class="col-2">
 			<div class="graybutton" style="margin-top:5px;" onclick="location.href='#!/thermostat'">
-				Back
+				<span class="fa fa-arrow-left"></span> Back
 			</div>
 		</div>
 		<div class="col-8 text-center">
@@ -17,7 +17,7 @@
 				<span class="fa fa-calendar"></span> Disable
 			</div>
 			<div class="graybutton" style="margin-top:5px;" ng-click="navigate('new')">
-				Add
+				<span class="fa fa-plus"></span> Add
 			</div>
 		</div>	
 	</div>
@@ -35,13 +35,13 @@
 			<tbody>
 				<tr ng-repeat="period in $ctrl.schedule" ng-click="navigate(period)">
 					<td>
-						<span ng-class="{'text-muted':(period.days.indexOf('0') == -1)}">Sun</span>
-						<span ng-class="{'text-muted':(period.days.indexOf('1') == -1)}">Mon</span>
-						<span ng-class="{'text-muted':(period.days.indexOf('2') == -1)}">Tue</span>
-						<span ng-class="{'text-muted':(period.days.indexOf('3') == -1)}">Wed</span>
-						<span ng-class="{'text-muted':(period.days.indexOf('4') == -1)}">Thu</span>
-						<span ng-class="{'text-muted':(period.days.indexOf('5') == -1)}">Fri</span>
-						<span ng-class="{'text-muted':(period.days.indexOf('6') == -1)}">Sat</span>
+						<span ng-class="{'muted':(period.days.indexOf('0') == -1)}">Sun</span>
+						<span ng-class="{'muted':(period.days.indexOf('1') == -1)}">Mon</span>
+						<span ng-class="{'muted':(period.days.indexOf('2') == -1)}">Tue</span>
+						<span ng-class="{'muted':(period.days.indexOf('3') == -1)}">Wed</span>
+						<span ng-class="{'muted':(period.days.indexOf('4') == -1)}">Thu</span>
+						<span ng-class="{'muted':(period.days.indexOf('5') == -1)}">Fri</span>
+						<span ng-class="{'muted':(period.days.indexOf('6') == -1)}">Sat</span>
 					</td>
 					<td>{{period.hour1}}:{{("0"+period.minute1).slice(-2)}}</td>
 					<td>{{period.hour2}}:{{("0"+period.minute2).slice(-2)}}</td>

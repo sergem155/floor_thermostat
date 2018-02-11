@@ -14,7 +14,7 @@
 
 	<div class="settings header">
 		<div class="graybutton" onclick="location.href='#!/schedule-list'">
-			&nbsp;<span class="fa fa-calendar"></span>&nbsp;
+			<span class="fa fa-calendar"></span> Schedule
 		</div>
 	</div>
 
@@ -26,7 +26,7 @@
 	</div>
 
 	<div class="time center footer">
-   		<h1 ng-controller='TimeCtrl'>{{ clock | date:'HH:mm'}}</h1>
+   		<h1 ng-controller='TimeCtrl'>{{ clock | date:'h:mm a' | lowercase}}</h1>
 	</div>
 
 	<div class="reload text-right footer">

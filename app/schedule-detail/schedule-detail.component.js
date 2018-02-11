@@ -66,5 +66,10 @@ angular.
 						window.location='#!/schedule-list';
 				});
 			}
+			$scope.delete = function(){
+				Schedule.delete(self.scheduleItem,function(response){
+						window.location='#!/schedule-list';
+				});
+			}
     	}]
 	});

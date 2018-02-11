@@ -17,9 +17,9 @@ function write_file($fname, $x){
 // loads crontab, tries to match on/off lines, throws away the rest
 function load_schedules(){
 	$schedules = array();
-	#exec('crontab -l',$output);
-	$output=read_file("/tmp/crontab-init.txt",'');
-	$output=explode("\n", $output);
+	exec('crontab -l',$output);
+	//$output=read_file("/tmp/crontab-init.txt",''); // test file instead of loading live crontab
+	//$output=explode("\n", $output);
 	foreach($output as $line){
 		$line=trim($line);
 		if(!strpos($line,'#')){
@@ -100,39 +100,56 @@ if ($_SERVER['REQUEST_METHOD']=='GET'){
 	}else{ // getting list of things
 		echo json_encode($paired_schedules);
 	}
-}elseif($_SERVER['REQUEST_METHOD']=='POST'){
+}elseif($_SERVER['REQUEST_METHOD']=='POST'){ // saving complete crontab
+	// load crontab
 	$paired_schedules=load_schedules();
 	$data = json_decode(file_get_contents('php://input'), true);
-	if (($key = array_search($del_val, $messages)) !== false) {
-		unset($messages[$key]);
-	}
-	// delete if replacing
+	// delete entry if replacing
 	foreach($paired_schedules as $key => $struct) {
 		if ($data['scheduleId'] == $struct['scheduleId']) {
 			unset($paired_schedules[$key]);
 		}
 	}
-	// insert
+	// insert entry
 	array_push($paired_schedules,$data);
-	// render
+	// render complete crontab
+	$crontab = "";
 	foreach($paired_schedules as $struct) {
 		extract($struct);
-		echo "$minute1 $hour1 * * ".implode(',',$days)." /home/pi/settemp.sh $temp1\n"
+		$crontab .= "$minute1 $hour1 * * ".implode(',',$days)." /home/pi/settemp.sh $temp1\n"
 			."$minute2 $hour2 * * ".implode(',',$days)." /home/pi/settemp.sh $temp2\n";
 	}
-	
+	// install updated crontab
+	write_file("/tmp/crontab.txt",$crontab);
+	exec('crontab /tmp/crontab.txt');
+	unlink("/tmp/crontab.txt");
+}elseif($_SERVER['REQUEST_METHOD']=='DELETE'){ // delete item, save complete crontab
+	$item = FALSE;
+	if(isset($_REQUEST['item']) && !empty($_REQUEST['item']) && $_REQUEST['item']!='list'){
+		$item = $_REQUEST['item'];
+	}
+	if(!$item) die;
+	// load crontab
+	$paired_schedules=load_schedules();
+	// delete entry if replacing
+	foreach($paired_schedules as $key => $struct) {
+		if ($item == $struct['scheduleId']) {
+			unset($paired_schedules[$key]);
+		}
+	}
+	// render complete crontab
+	$crontab = "";
+	foreach($paired_schedules as $struct) {
+		extract($struct);
+		$crontab .= "$minute1 $hour1 * * ".implode(',',$days)." /home/pi/settemp.sh $temp1\n"
+			."$minute2 $hour2 * * ".implode(',',$days)." /home/pi/settemp.sh $temp2\n";
+	}
+	// install updated crontab
+	write_file("/tmp/crontab.txt",$crontab);
+	exec('crontab /tmp/crontab.txt');
+	unlink("/tmp/crontab.txt");
 }else{
-	//$data = json_decode(file_get_contents('php://input'), true);
-	//if( $data['set_temp'] > 40 && $data['set_temp'] < 90){
-	//	write_file("/tmp/set-temp.txt",$data['set_temp']);
-	//}
-	#$output = shell_exec('crontab -l');
-	#file_put_contents('/tmp/crontab.txt', $output.'* * * * * NEW_CRON'.PHP_EOL);
-	#echo exec('crontab /tmp/crontab.txt');
-	#echo exec('crontab -r');
-
-
-
+	// do nothing
 }
 
 ?>
