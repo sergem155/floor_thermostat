@@ -6,11 +6,7 @@ angular.
 
       $routeProvider.
         when('/thermostat', {
-          template: '<div class="container-fluid">\
-					<thermostat-status></thermostat-status>\
-					<weather-current></weather-current>\
-					<weather-forecast></weather-forecast>\
-					</div>'
+          template: '<thermostat-status></thermostat-status>'
         }).
         when('/schedule-list', {
           template: '<schedule-list></schedule-list>'

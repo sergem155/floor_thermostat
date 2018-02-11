@@ -3,11 +3,12 @@ angular.
 	module('thermostatStatus').
 	component('thermostatStatus', {  
 		templateUrl: 'thermostat-status/thermostat-status.template.html',
-		controller: ['$http','$scope','$interval','Thermostat',function ThermostatStatusController($http,$scope,$interval,Thermostat) {
+		controller: ['$http','$scope','$interval','Thermostat','ScheduleStatus',function ThermostatStatusController($http,$scope,$interval,Thermostat,ScheduleStatus) {
 			var self=this;
 			$scope.loadData = function () {
 				self.thermostat = Thermostat.get();
 			};
+			self.schedule_status = ScheduleStatus.get(); // changes on button, no need to refresh
 			$scope.loadData();
 			$scope.promise = $interval($scope.loadData, 10000);
 			$scope.$on('$destroy', function() {

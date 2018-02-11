@@ -1,1 +1,1 @@
-angular.module('thermostatStatus', []);
+angular.module('thermostatStatus', ['weatherForecast','weatherCurrent']);
