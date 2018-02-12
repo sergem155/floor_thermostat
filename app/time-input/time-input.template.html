@@ -1,7 +1,7 @@
 
 	<div>
 		<div class="text-center">
-			<h2>{{$ctrl.hour}}:{{("00"+$ctrl.minute).slice(-2)}} 
+			<h2>{{$ctrl.label}}: {{$ctrl.hour}}:{{("00"+$ctrl.minute).slice(-2)}} 
 				<span class="text-primary" style="cursor:pointer;" ng-click="setMeridiem($ctrl.meridiem=='am'?'pm':'am')")">{{$ctrl.meridiem}}</span>
 			</h2>
 		</div>

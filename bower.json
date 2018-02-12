@@ -10,6 +10,5 @@
     "angular-resource": "1.6.x",
     "angular-route": "1.6.x",
     "bootstrap": "4.0.x",
-    "angular-circular-timepicker": "*"
   }
 }

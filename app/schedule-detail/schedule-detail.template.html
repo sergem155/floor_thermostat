@@ -1,37 +1,39 @@
-<div class="container-fluid">
+<div class="grid-container-schedule-item">
 
-	<div class="row bg-primary text-white" style="padding-top:10px;">
-		<div class="col-2">
-			<div class="graybutton" style="margin-top:5px;" onclick="location.href='#!/schedule-list'">
-				<span class="fa fa-arrow-left"></span> Back
-			</div>
+	<div class="back header">
+		<div class="graybutton" onclick="location.href='#!/schedule-list'">
+			<span class="fa fa-arrow-left"></span> Back
 		</div>
-		<div class="col-8 text-center">
-			<h1>Schedule Item</h1>
-		</div>
-		<div class="col-2 text-right">
-			<div class="graybutton" style="margin-top:5px;" ng-if="$ctrl.scheduleItem.scheduleId!='new'" ng-click="delete()">
-				<span class="fa fa-remove"></span> Delete
-			</div>
-			<div class="graybutton" style="margin-top:5px;" ng-click="save()">
-				<span class="fa fa-check"></span> Save
-			</div>
-		</div>	
 	</div>
+	<div class="title header">
+		Period
+	</div>
+	<div class="actions header">
+		<div class="graybutton" ng-if="$ctrl.scheduleItem.scheduleId!='new'" ng-click="delete()">
+			<span class="fa fa-remove"></span> Delete
+		</div>
+		<div class="graybutton" ng-click="save()">
+			<span class="fa fa-check"></span> Save
+		</div>
+	</div>	
 
-	<div class="row"><div class="col-12">
-		<div ng-repeat="day in [0,1,2,3,4,5,6]" class="checkbutton days" 
+	<div class="days">
+		<div ng-repeat="day in [0,1,2,3,4,5,6]" class="checkbutton day" 
 		ng-class="{'checkbutton-active':$ctrl.scheduleItem.days.indexOf(''+day)!=-1}"
 		ng-click="toggle(day)">{{$ctrl.day_names[day]}}</div>
-	</div></div>
-	<div class="row" style="margin-top:5px;">
-		<time-input style="width:40%" hour="{{hour2412($ctrl.scheduleItem.hour1)}}" minute="{{$ctrl.scheduleItem.minute1}}" meridiem="{{$ctrl.scheduleItem.hour1<12?'am':'pm'}}" label="from"></time-input>
-		<time-input style="width:40%" hour="{{hour2412($ctrl.scheduleItem.hour2)}}" minute="{{$ctrl.scheduleItem.minute2}}" meridiem="{{$ctrl.scheduleItem.hour2<12?'am':'pm'}}" label="until"></time-input>
-		<div style="float:left;font-size:50px;padding-top:7%;padding-left:1%;width:15%" class="text-center">
+	</div>
+
+	<div class="schedule grid-container-dials">
+		<time-input class="from" hour="{{hour2412($ctrl.scheduleItem.hour1)}}" minute="{{$ctrl.scheduleItem.minute1}}" meridiem="{{$ctrl.scheduleItem.hour1<12?'am':'pm'}}" label="from"></time-input>
+		<time-input class="until" hour="{{hour2412($ctrl.scheduleItem.hour2)}}" minute="{{$ctrl.scheduleItem.minute2}}" meridiem="{{$ctrl.scheduleItem.hour2<12?'am':'pm'}}" label="until"></time-input>
+		<div class="settemp">
+			<div style="text-align:center;">
 			<div ng-click="($ctrl.scheduleItem.temp1<90)&&($ctrl.scheduleItem.temp1=$ctrl.scheduleItem.temp1+1)"><span class="fa fa-chevron-circle-up text-primary"></span></div>
 			<div>{{$ctrl.scheduleItem.temp1}}F</div>
 			<div ng-click="($ctrl.scheduleItem.temp1>43) && ($ctrl.scheduleItem.temp1=$ctrl.scheduleItem.temp1-1)"><span class="fa fa-chevron-circle-down text-primary"></span></div>
+			</div>
 		</div>
 	</div>
+
 </div>
 

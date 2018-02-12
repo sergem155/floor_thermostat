@@ -1,28 +1,26 @@
-<div class="container-fluid">
+<div class="grid-container-schedule">
 
-	<div class="row bg-primary text-white" style="padding-top:10px;">
-		<div class="col-2">
-			<div class="graybutton" style="margin-top:5px;" onclick="location.href='#!/thermostat'">
-				<span class="fa fa-arrow-left"></span> Back
-			</div>
+	<div class="back header">
+		<div class="graybutton" onclick="location.href='#!/thermostat'">
+			<span class="fa fa-arrow-left"></span> Back
 		</div>
-		<div class="col-8 text-center">
-			<h1>Schedules</h1>
-		</div>
-		<div class="col-2 text-right">
-			<div ng-if="$ctrl.schedule_status.schedule_status == 0" class="graybutton" style="margin-top:5px;margin-right:10px" ng-click="set_schedule(1)">
-				<span class="fa fa-calendar"></span> Enable
-			</div>
-			<div ng-if="$ctrl.schedule_status.schedule_status == 1" class="graybutton" style="margin-top:5px;margin-right:10px" ng-click="set_schedule(0)">
-				<span class="fa fa-calendar"></span> Disable
-			</div>
-			<div class="graybutton" style="margin-top:5px;" ng-click="navigate('new')">
-				<span class="fa fa-plus"></span> Add
-			</div>
-		</div>	
 	</div>
+	<div class="title header">
+		Schedules
+	</div>
+	<div class="actions header">
+		<div ng-if="$ctrl.schedule_status.schedule_status == 0" class="graybutton" ng-click="set_schedule(1)">
+			<span class="fa fa-calendar"></span> Enable
+		</div>
+		<div ng-if="$ctrl.schedule_status.schedule_status == 1" class="graybutton" ng-click="set_schedule(0)">
+			<span class="fa fa-calendar"></span> Disable
+		</div>
+		<div class="graybutton" ng-click="navigate('new')">
+			<span class="fa fa-plus"></span> Add
+		</div>
+	</div>	
 
-	<div class="row">
+	<div class="schedule">
 		<table class="table" style="font-size:20px">
 			<thead>
 				<tr>
