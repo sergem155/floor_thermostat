@@ -1,11 +1,11 @@
-<div class="row" style="padding-top:15px;">
-	<div class="col-2 text-center">
+<div class="grid-container-weather">
+	<div class="wpic">
 		<img style="width:86px; height:86px;" ng-src="{{$ctrl.weather.features[0].properties.icon}}" class="mx-auto"></img>
 	</div>
-	<div class="col-2">
+	<div class="wtemp">
 		<h2 class="text-center">{{Math.round($ctrl.weather.features[0].properties.temperature.value/5*9+32)}}F<br/><span class="text-primary">{{Math.round($ctrl.weather.features[0].properties.temperature.value)}}C</span></h2>
 	</div>
-	<div class="col-8">
+	<div class="wtext">
 		<h2>{{$ctrl.weather.features[0].properties.textDescription}}</h3>
 	</div>
 </div>

@@ -105,6 +105,27 @@
 		.until{grid-area:until;display: flex; align-items: center; justify-content: center;}
 		.settemp{grid-area:settemp;font-size:2.5rem;display: flex; align-items: center; justify-content: center;}
 
+		.grid-container-weather{
+			display: grid;
+			margin-top:15px;
+			grid-template-rows: auto;
+			grid-template-columns: 2fr 2fr 8fr;
+			grid-template-areas: "wpic wtemp wtext";
+		}
+		.wpic{grid-area:wpic;display: flex; justify-content: center;}
+		.wtemp{grid-area:wtemp;}
+		.wtext{grid-area:wtext;}
+
+		.grid-container-forecast{
+			display: grid;
+			margin-top:15px;
+			grid-template-rows: auto;
+			grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+		}
+
+		.grid-container-forecast>div {display: flex; justify-content: center;}
+		.grid-container-forecast>div {display: block; text-align: center;}
+		
 		.centerbox{display: flex; align-items: center; justify-content: center;} 
 		.header{background-color: #007bff; color: white; padding:0 10px;}
 		.footer{padding:0 10px; color: #007bff; font-size: 2.5rem;}
