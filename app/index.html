@@ -47,20 +47,46 @@
 		.muted {color:#ddd;}
 
 		html, body, body>div {height:100%; width:100%;}
-		body {margin: 0; padding: 0; border: none; overflow: hidden; -webkit-user-select:none; font-family: Roboto;}
+		body {margin: 0; padding: 0; border: none; -webkit-user-select:none; font-family: Roboto;}
 
-		.grid-container{
-			display: grid;
-			height:100%;
-			grid-template-rows: auto auto 1fr auto;
-			grid-template-columns: 3fr 2fr 3fr;
-			grid-template-areas: "temp onoff settings"
-									"weather weather weather"
-									"fcast fcast fcast"
-									"away time reload";
+		@media only screen 
+		  and (min-device-width: 600px) {
+
+			.grid-container{
+				display: grid;
+				height:100%;
+				grid-template-rows: auto auto 1fr auto;
+				grid-template-columns: 2fr 1fr 2fr 1fr 2fr;
+				grid-template-areas: "temp temp onoff settings settings"
+										"weather weather weather weather weather"
+										"fcast fcast fcast fcast fcast"
+										"away time time time reload";
+			}
+			.onoff {display: flex; align-items: center; justify-content: center;}
+			body {overflow: hidden;}
 		}
+
+		@media only screen 
+		  and (max-device-width: 599px) {
+
+			.grid-container{
+				display: grid;
+				grid-template-rows: auto;
+				grid-template-columns: 1fr 1fr;
+				grid-template-areas: "temp temp"
+										"onoff settings"
+										"away reload"
+										"weather weather"
+										"fcast fcast"
+										"time time";
+			}
+			.awayx{background-color: #007bff!important; color: white!important;}
+			
+		}
+
 		.temp {grid-area: temp; font-size: 2.5rem;}
-		.onoff {grid-area:onoff; display: flex; align-items: center; justify-content: center;}
+		.onoff {grid-area:onoff; }
+		.onoff>* {margin: 10px;}
 		.settings{grid-area:settings; display: flex; align-items: center; justify-content: flex-end;}
 		.weather{grid-area:weather;margin:0 6px;}
 		.fcast{grid-area:fcast;overflow:hidden;margin:0 6px;}
@@ -105,23 +131,77 @@
 		.until{grid-area:until;display: flex; align-items: center; justify-content: center;}
 		.settemp{grid-area:settemp;font-size:2.5rem;display: flex; align-items: center; justify-content: center;}
 
-		.grid-container-weather{
-			display: grid;
-			margin-top:15px;
-			grid-template-rows: auto;
-			grid-template-columns: 2fr 2fr 8fr;
-			grid-template-areas: "wpic wtemp wtext";
+		@media only screen 
+		  and (min-device-width: 600px) {
+			.grid-container-weather{
+				display: grid;
+				margin-top:15px;
+				grid-template-rows: auto;
+				grid-template-columns: 2fr 2fr 8fr;
+				grid-template-areas: "wpic wtemp wtext";
+			}
+
+			.grid-container-forecast{
+				display: grid;
+				margin-top:15px;
+				grid-template-rows: auto;
+				grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+				grid-template-areas: "fc-temp-0 fc-temp-1 fc-temp-2 fc-temp-3 fc-temp-4 fc-temp-5"
+										"fc-period-0 fc-period-1 fc-period-2 fc-period-3 fc-period-4 fc-period-5"
+										"fc-pic-0 fc-pic-1 fc-pic-2 fc-pic-3 fc-pic-4 fc-pic-5";
+			}
+		}
+		@media only screen 
+		  and (max-device-width: 599px) {
+			.grid-container-weather{
+				display: grid;
+				margin-top:15px;
+				grid-template-rows: auto;
+				grid-template-columns: 1fr 1fr;
+				grid-template-areas: "wpic wtemp"
+										"wtext wtext";
+			}
+			.wtext{grid-area:wtext;text-align:center; margin-top: 15px;}
+
+			.grid-container-forecast{
+				display: grid;
+				margin-top:15px;
+				grid-template-rows: auto;
+				grid-template-columns: 1fr 1fr;
+				grid-template-areas: "fc-temp-0 fc-temp-1"
+										"fc-period-0 fc-period-1"
+										"fc-pic-0 fc-pic-1"
+										"fc-temp-2 fc-temp-3"
+										"fc-period-2 fc-period-3"
+										"fc-pic-2 fc-pic-3"
+										"fc-temp-4 fc-temp-5"
+										"fc-period-4 fc-period-5"
+										"fc-pic-4 fc-pic-5";
+			}
 		}
 		.wpic{grid-area:wpic;display: flex; justify-content: center;}
 		.wtemp{grid-area:wtemp;}
 		.wtext{grid-area:wtext;}
 
-		.grid-container-forecast{
-			display: grid;
-			margin-top:15px;
-			grid-template-rows: auto;
-			grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-		}
+		.fc-temp-0 {grid-area:fc-temp-0;}
+		.fc-temp-1 {grid-area:fc-temp-1;}
+		.fc-temp-2 {grid-area:fc-temp-2;}
+		.fc-temp-3 {grid-area:fc-temp-3;}
+		.fc-temp-4 {grid-area:fc-temp-4;}
+		.fc-temp-5 {grid-area:fc-temp-5;}
+		.fc-period-0 {grid-area:fc-period-0;}
+		.fc-period-1 {grid-area:fc-period-1;}
+		.fc-period-2 {grid-area:fc-period-2;}
+		.fc-period-3 {grid-area:fc-period-3;}
+		.fc-period-4 {grid-area:fc-period-4;}
+		.fc-period-5 {grid-area:fc-period-5;}
+		.fc-pic-0 {grid-area:fc-pic-0;}
+		.fc-pic-1 {grid-area:fc-pic-1;}
+		.fc-pic-2 {grid-area:fc-pic-2;}
+		.fc-pic-3 {grid-area:fc-pic-3;}
+		.fc-pic-4 {grid-area:fc-pic-4;}
+		.fc-pic-5 {grid-area:fc-pic-5;}
+
 
 		.grid-container-forecast>div {display: block; text-align: center;}
 		

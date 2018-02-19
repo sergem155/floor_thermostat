@@ -1,11 +1,11 @@
 <div class="grid-container-forecast">
-		<div ng-repeat="period in $ctrl.forecast.properties.periods | limitTo: 6">
+		<div ng-repeat="period in $ctrl.forecast.properties.periods | limitTo: 6" class="fc-temp-{{$index}}">
 			<h4>{{period.temperature}}{{period.temperatureUnit}} <span class="text-primary">{{Math.round((period.temperature-32)/9*5)}}C</span></h4>
 		</div>
-		<div ng-repeat="period in $ctrl.forecast.properties.periods | limitTo: 6">
+		<div ng-repeat="period in $ctrl.forecast.properties.periods | limitTo: 6" class="fc-period-{{$index}}">
 			<p><strong>{{period.name}}</strong></p>
 		</div>
-		<div ng-repeat="period in $ctrl.forecast.properties.periods | limitTo: 6">
+		<div ng-repeat="period in $ctrl.forecast.properties.periods | limitTo: 6" class="fc-pic-{{$index}}">
 			<img style="width:86px; height:86px;" ng-src="{{period.icon}}" class="mx-auto" ></img>
 			<p>{{period.shortForecast}}</p>
 		</div>
