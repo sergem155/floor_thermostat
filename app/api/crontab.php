@@ -18,7 +18,7 @@ function write_file($fname, $x){
 function load_schedules(){
 	$schedules = array();
 	exec('crontab -l',$output);
-	//$output=read_file("/tmp/crontab-init.txt",''); // test file instead of loading live crontab
+	//$output=read_file("/var/run/crontab-init.txt",''); // test file instead of loading live crontab
 	//$output=explode("\n", $output);
 	foreach($output as $line){
 		$line=trim($line);
@@ -120,9 +120,9 @@ if ($_SERVER['REQUEST_METHOD']=='GET'){
 			."$minute2 $hour2 * * ".implode(',',$days)." /home/pi/settemp.sh $temp2\n";
 	}
 	// install updated crontab
-	write_file("/tmp/crontab.txt",$crontab);
-	exec('crontab /tmp/crontab.txt');
-	unlink("/tmp/crontab.txt");
+	write_file("/var/run/crontab.txt",$crontab);
+	exec('crontab /var/run/crontab.txt');
+	unlink("/var/run/crontab.txt");
 }elseif($_SERVER['REQUEST_METHOD']=='DELETE'){ // delete item, save complete crontab
 	$item = FALSE;
 	if(isset($_REQUEST['item']) && !empty($_REQUEST['item']) && $_REQUEST['item']!='list'){
@@ -145,9 +145,9 @@ if ($_SERVER['REQUEST_METHOD']=='GET'){
 			."$minute2 $hour2 * * ".implode(',',$days)." /home/pi/settemp.sh $temp2\n";
 	}
 	// install updated crontab
-	write_file("/tmp/crontab.txt",$crontab);
-	exec('crontab /tmp/crontab.txt');
-	unlink("/tmp/crontab.txt");
+	write_file("/var/run/crontab.txt",$crontab);
+	exec('crontab /var/run/crontab.txt');
+	unlink("/var/run/crontab.txt");
 }else{
 	// do nothing
 }

@@ -40,7 +40,7 @@ def readtemp():
 def read_file(filename, default):
 	retval = default;
 	try:
-		with open('/tmp/set-temp.txt','r') as f: 
+		with open('/var/run/set-temp.txt','r') as f: 
 			retval = f.read().strip()
 			f.close()		
 	except:
@@ -61,8 +61,8 @@ try:
 		temp=readtemp()
 		if(temp!=oldtemp):
 			oldtemp=temp
-			write_file('/tmp/current-temp.txt',str(temp))
-		settemp = int(read_file('/tmp/set-temp.txt', "41"))
+			write_file('/var/run/current-temp.txt',str(temp))
+		settemp = int(read_file('/var/run/set-temp.txt', "41"))
 		print datetime.datetime.now()
 		print settemp
 		print temp
@@ -70,11 +70,11 @@ try:
 		if temp < settemp and relay == 0:
 			GPIO.output(15,GPIO.HIGH)
 			relay = 1
-			write_file('/tmp/relay-state.txt',"on")
+			write_file('/var/run/relay-state.txt',"on")
 		if temp >= settemp+1 and relay == 1:
 			GPIO.output(15,GPIO.LOW)
 			relay = 0
-			write_file('/tmp/relay-state.txt',"off")
+			write_file('/var/run/relay-state.txt',"off")
 		sleep(60)
 			
 except:

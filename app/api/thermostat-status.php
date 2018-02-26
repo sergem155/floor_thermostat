@@ -14,13 +14,13 @@ function write_file($fname, $x){
 }
 if ($_SERVER['REQUEST_METHOD']=='GET'){
 // TODO: data sanity checks
-	$data = ['temp'=>read_file("/tmp/current-temp.txt","0"), 'set_temp'=>read_file("/tmp/set-temp.txt","41"), 'relay'=>read_file("/tmp/relay-state.txt","off")];
+	$data = ['temp'=>read_file("/var/run/current-temp.txt","0"), 'set_temp'=>read_file("/var/run/set-temp.txt","41"), 'relay'=>read_file("/var/run/relay-state.txt","off")];
 	header('Content-Type: application/json');
 	echo json_encode($data);
 }else{
 	$data = json_decode(file_get_contents('php://input'), true);
 	if( $data['set_temp'] > 40 && $data['set_temp'] < 90){
-		write_file("/tmp/set-temp.txt",$data['set_temp']);
+		write_file("/var/run/set-temp.txt",$data['set_temp']);
 	}
 }
 ?>
