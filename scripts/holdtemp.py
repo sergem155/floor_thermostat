@@ -15,14 +15,14 @@ GPIO.setup(15, GPIO.OUT, initial=GPIO.LOW)
 #ADC setup
 spi = spidev.SpiDev()
 spi.open(0,0)
-spi.max_speed_hz = 5000
+spi.max_speed_hz = 256000
 
-# read SPI data from MCP3202 chip, 2 possible adc's (0 thru 1), ch 1
+# read SPI data from MCP3202 chip, 2 possible adc's (0 thru 1)
 def readadc():
 	adcnum=1
-	GPIO.output(13,GPIO.HIGH) #power the thermistor
-	r = spi.xfer2([0xA0,0])
-	adcout = ((r[0]&15) << 8) + r[1] #12 bit
+	GPIO.output(13,GPIO.HIGH)
+	r = spi.xfer2([1,0x40,0]) # 0x40 = differential, channel 1, MSB first
+	adcout = ((r[1]&15) << 8) + r[2]
 	GPIO.output(13,GPIO.LOW)
 	return adcout
 
@@ -34,13 +34,13 @@ def readtemp():
 		acc+= readadc()
 		counter+=1
 	temp = acc/counter
-	temp = int(round(-0.00029209278229914*temp*temp + 0.786092791224361*temp -384.700028414951))
+	temp = int(round(-0.110690811535918 * temp + 479.58))
 	return temp
 
 def read_file(filename, default):
 	retval = default;
 	try:
-		with open('/var/run/set-temp.txt','r') as f: 
+		with open('/run/lock/set-temp.txt','r') as f: 
 			retval = f.read().strip()
 			f.close()		
 	except:
@@ -61,8 +61,8 @@ try:
 		temp=readtemp()
 		if(temp!=oldtemp):
 			oldtemp=temp
-			write_file('/var/run/current-temp.txt',str(temp))
-		settemp = int(read_file('/var/run/set-temp.txt', "41"))
+			write_file('/run/lock/current-temp.txt',str(temp))
+		settemp = int(read_file('/run/lock/set-temp.txt', "41"))
 		print datetime.datetime.now()
 		print settemp
 		print temp
@@ -70,11 +70,11 @@ try:
 		if temp < settemp and relay == 0:
 			GPIO.output(15,GPIO.HIGH)
 			relay = 1
-			write_file('/var/run/relay-state.txt',"on")
+			write_file('/run/lock/relay-state.txt',"on")
 		if temp >= settemp+1 and relay == 1:
 			GPIO.output(15,GPIO.LOW)
 			relay = 0
-			write_file('/var/run/relay-state.txt',"off")
+			write_file('/run/lock/relay-state.txt',"off")
 		sleep(60)
 			
 except:
