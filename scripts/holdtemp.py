@@ -74,6 +74,7 @@ def write_file(filename, data):
 		f.close()
 
 try:
+	turn_off()
 	while(1):
 		temp=readtemp()
 		# doubles up as a keepalive:

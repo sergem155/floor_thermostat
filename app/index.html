@@ -63,6 +63,16 @@
 										"away time time time reload";
 			}
 			.onoff {display: flex; align-items: center; justify-content: center;}
+
+			.grid-container-schedule{
+				display: grid;
+				height:100%;
+				grid-template-rows: auto 1fr;
+				grid-template-columns: 2fr 1fr 2fr;
+				grid-template-areas: "back title actions"
+										"schedule schedule schedule";
+			}
+
 			body {overflow: hidden;}
 		}
 
@@ -82,6 +92,16 @@
 			}
 			.awayx{background-color: #007bff!important; color: white!important;}
 			
+			.grid-container-schedule{
+				display: grid;
+				height:100%;
+				grid-template-rows: auto auto 1fr;
+				grid-template-columns: 1fr 1fr;
+				grid-template-areas: 	"title title"
+										"back actions"
+										"schedule schedule";
+			}
+
 		}
 
 		.temp {grid-area: temp; font-size: 2.5rem;}
@@ -94,14 +114,6 @@
 		.reload{grid-area:reload;display: flex; align-items: center; justify-content: flex-end;}
 		.away{grid-area:away;display: flex; align-items: center;vertical-align: middle;}
 
-		.grid-container-schedule{
-			display: grid;
-			height:100%;
-			grid-template-rows: auto 1fr;
-			grid-template-columns: 2fr 1fr 2fr;
-			grid-template-areas: "back title actions"
-									"schedule schedule schedule";
-		}
 		.grid-container-schedule-item{
 			display: grid;
 			height:100%;
@@ -114,6 +126,7 @@
 
 
 		.back {grid-area: back;display: flex; align-items: center; }
+		.back>* {margin: 10px;}
 		.title {grid-area:title;  font-size: 2.5rem; display: flex; align-items: center; justify-content: center;}
 		.actions{grid-area:actions; display: flex; align-items: center; justify-content: flex-end;}
 		.days{grid-area:days;}
