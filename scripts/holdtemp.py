@@ -45,15 +45,12 @@ def readtemp():
 	temp = int(round(-0.110690811535918 * temp + 479.58)) # convert to degrees F
 	return temp
 
-relay = 0
 def turn_off():
 	GPIO.output(15,GPIO.LOW)
-	relay = 0
 	write_file('/run/lock/relay-state.txt',"off")
 
 def turn_on():
 	GPIO.output(15,GPIO.HIGH)
-	relay = 1
 	write_file('/run/lock/relay-state.txt',"on")
 
 def read_file(filename, default):
@@ -83,13 +80,12 @@ try:
 		print datetime.datetime.now()
 		print settemp
 		print temp
-		print relay
 		if 32 > temp or temp > 90:
 			turn_off() # reading is outside of sane range
 		else:
-			if temp < settemp and relay == 0:
+			if temp < settemp:
 				turn_on()
-			if temp >= settemp+1 and relay == 1:
+			if temp >= settemp+1:
 				turn_off()
 		sleep(10)
 			
