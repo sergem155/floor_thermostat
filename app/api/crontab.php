@@ -24,7 +24,7 @@ function load_schedules(){
 		$line=trim($line);
 		if(!strpos($line,'#')){
 			#echo $line;
-			if(preg_match('/^(\*|[\d,]+)\s(\*|[\d,]+)\s(\*|[\d,]+)\s(\*|[\d,]+)\s(\*|[\d,]+)\s\/home\/pi\/settemp.sh\s(\d+)$/m',$line,$matches)){
+			if(preg_match('/^(\*|[\d,]+)\s(\*|[\d,]+)\s(\*|[\d,]+)\s(\*|[\d,]+)\s(\*|[\d,]+)\s\/var\/www\/thermostat\/scripts\/settemp.sh\s(\d+)$/m',$line,$matches)){
 				#var_dump($matches);
 				$schedule = array();
 				$schedule['minute']=$matches[1];
@@ -116,8 +116,8 @@ if ($_SERVER['REQUEST_METHOD']=='GET'){
 	$crontab = "";
 	foreach($paired_schedules as $struct) {
 		extract($struct);
-		$crontab .= "$minute1 $hour1 * * ".implode(',',$days)." /home/pi/settemp.sh $temp1\n"
-			."$minute2 $hour2 * * ".implode(',',$days)." /home/pi/settemp.sh $temp2\n";
+		$crontab .= "$minute1 $hour1 * * ".implode(',',$days)." /var/www/thermostat/scripts/settemp.sh $temp1\n"
+			."$minute2 $hour2 * * ".implode(',',$days)." /var/www/thermostat/scripts/settemp.sh $temp2\n";
 	}
 	// install updated crontab
 	write_file("/run/lock/crontab.txt",$crontab);
@@ -141,8 +141,8 @@ if ($_SERVER['REQUEST_METHOD']=='GET'){
 	$crontab = "";
 	foreach($paired_schedules as $struct) {
 		extract($struct);
-		$crontab .= "$minute1 $hour1 * * ".implode(',',$days)." /home/pi/settemp.sh $temp1\n"
-			."$minute2 $hour2 * * ".implode(',',$days)." /home/pi/settemp.sh $temp2\n";
+		$crontab .= "$minute1 $hour1 * * ".implode(',',$days)." /var/www/thermostat/scripts/settemp.sh $temp1\n"
+			."$minute2 $hour2 * * ".implode(',',$days)." /var/www/thermostat/scripts/settemp.sh $temp2\n";
 	}
 	// install updated crontab
 	write_file("/run/lock/crontab.txt",$crontab);
